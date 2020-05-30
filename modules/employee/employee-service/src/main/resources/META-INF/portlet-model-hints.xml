@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.docs.employee.model.Employee">
+		<field name="uuid" type="String" />
+		<field name="empId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="psno" type="long" />
+		<field name="fname" type="String" />
+		<field name="lname" type="String" />
+		<field name="empAddress" type="String" />
+	</model>
+</model-hints>
