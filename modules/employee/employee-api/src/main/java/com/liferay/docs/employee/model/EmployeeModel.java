@@ -255,6 +255,21 @@ public interface EmployeeModel extends BaseModel<Employee>, GroupedModel,
 	public void setLname(String lname);
 
 	/**
+	 * Returns the email of this employee.
+	 *
+	 * @return the email of this employee
+	 */
+	@AutoEscape
+	public String getEmail();
+
+	/**
+	 * Sets the email of this employee.
+	 *
+	 * @param email the email of this employee
+	 */
+	public void setEmail(String email);
+
+	/**
 	 * Returns the emp address of this employee.
 	 *
 	 * @return the emp address of this employee

@@ -11,6 +11,7 @@
 		<liferay-ui:search-container-column-text property="psno" name="PS No." />
 		<liferay-ui:search-container-column-text property="fname" name="First Name" />
 		<liferay-ui:search-container-column-text property="lname" name="Last Name" />
+		<liferay-ui:search-container-column-text property="email" name="Email" />
 		<liferay-ui:search-container-column-text property="empAddress" name="Address"/>
 	</liferay-ui:search-container-row>
 	<liferay-ui:search-iterator />

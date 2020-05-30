@@ -44,7 +44,7 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 	 * Never reference this class directly. Always use {@link com.liferay.docs.employee.service.EmployeeLocalServiceUtil} to access the employee local service.
 	 */
 	
-	public Employee addEmployee(long userId, long psno, String fname, String lname, String empAddress, ServiceContext serviceContext) throws PortalException
+	public Employee addEmployee(long userId, long psno, String fname, String lname, String email, String empAddress, ServiceContext serviceContext) throws PortalException
 	{
 		long groupId = serviceContext.getScopeGroupId();
 
@@ -67,6 +67,7 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 	    employee.setPsno(psno);
 	    employee.setFname(fname);
 	    employee.setLname(lname);
+	    employee.setEmail(email);
 	    employee.setEmpAddress(empAddress);
 	    
 	    employeePersistence.update(employee);
@@ -74,7 +75,7 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 	    return employee;
 	}
 	
-	public Employee updateEmployee(long userId, long psno, long empId, String fname, String lname, String empAddress, ServiceContext serviceContext) throws PortalException
+	public Employee updateEmployee(long userId, long psno, long empId, String fname, String lname, String email, String empAddress, ServiceContext serviceContext) throws PortalException
 	{
 		Date now = new Date();
 		User user = userLocalService.getUserById(userId);
@@ -87,6 +88,7 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 	    employee.setPsno(psno);
 	    employee.setFname(fname);
 	    employee.setLname(lname);
+	    employee.setEmail(email);
 	    employee.setEmpAddress(empAddress);
 	    employee.setExpandoBridgeAttributes(serviceContext);
 	    

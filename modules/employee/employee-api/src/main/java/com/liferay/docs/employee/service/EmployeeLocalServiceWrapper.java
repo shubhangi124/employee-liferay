@@ -47,11 +47,11 @@ public class EmployeeLocalServiceWrapper implements EmployeeLocalService,
 
 	@Override
 	public com.liferay.docs.employee.model.Employee addEmployee(long userId,
-		long psno, String fname, String lname, String empAddress,
+		long psno, String fname, String lname, String email, String empAddress,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _employeeLocalService.addEmployee(userId, psno, fname, lname,
-			empAddress, serviceContext);
+			email, empAddress, serviceContext);
 	}
 
 	/**
@@ -355,11 +355,11 @@ public class EmployeeLocalServiceWrapper implements EmployeeLocalService,
 	@Override
 	public com.liferay.docs.employee.model.Employee updateEmployee(
 		long userId, long psno, long empId, String fname, String lname,
-		String empAddress,
+		String email, String empAddress,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _employeeLocalService.updateEmployee(userId, psno, empId, fname,
-			lname, empAddress, serviceContext);
+			lname, email, empAddress, serviceContext);
 	}
 
 	@Override

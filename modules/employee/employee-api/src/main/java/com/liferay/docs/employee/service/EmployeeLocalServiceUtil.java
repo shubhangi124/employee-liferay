@@ -55,11 +55,12 @@ public class EmployeeLocalServiceUtil {
 	}
 
 	public static com.liferay.docs.employee.model.Employee addEmployee(
-		long userId, long psno, String fname, String lname, String empAddress,
+		long userId, long psno, String fname, String lname, String email,
+		String empAddress,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addEmployee(userId, psno, fname, lname, empAddress,
+				   .addEmployee(userId, psno, fname, lname, email, empAddress,
 			serviceContext);
 	}
 
@@ -339,11 +340,11 @@ public class EmployeeLocalServiceUtil {
 
 	public static com.liferay.docs.employee.model.Employee updateEmployee(
 		long userId, long psno, long empId, String fname, String lname,
-		String empAddress,
+		String email, String empAddress,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .updateEmployee(userId, psno, empId, fname, lname,
+				   .updateEmployee(userId, psno, empId, fname, lname, email,
 			empAddress, serviceContext);
 	}
 

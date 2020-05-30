@@ -75,8 +75,8 @@ public interface EmployeeLocalService extends BaseLocalService,
 	public Employee addEmployee(Employee employee);
 
 	public Employee addEmployee(long userId, long psno, String fname,
-		String lname, String empAddress, ServiceContext serviceContext)
-		throws PortalException;
+		String lname, String email, String empAddress,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new employee with the primary key. Does not add the employee to the database.
@@ -296,6 +296,6 @@ public interface EmployeeLocalService extends BaseLocalService,
 	public Employee updateEmployee(Employee employee);
 
 	public Employee updateEmployee(long userId, long psno, long empId,
-		String fname, String lname, String empAddress,
+		String fname, String lname, String email, String empAddress,
 		ServiceContext serviceContext) throws PortalException;
 }

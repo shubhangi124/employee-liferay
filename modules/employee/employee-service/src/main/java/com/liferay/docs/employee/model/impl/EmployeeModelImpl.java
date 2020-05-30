@@ -84,6 +84,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 			{ "psno", Types.BIGINT },
 			{ "fname", Types.VARCHAR },
 			{ "lname", Types.VARCHAR },
+			{ "email", Types.VARCHAR },
 			{ "empAddress", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
@@ -100,10 +101,11 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		TABLE_COLUMNS_MAP.put("psno", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("fname", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("lname", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("email", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("empAddress", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table EMP_Employee (uuid_ VARCHAR(75) null,empId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,psno LONG,fname VARCHAR(75) null,lname VARCHAR(75) null,empAddress VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table EMP_Employee (uuid_ VARCHAR(75) null,empId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,psno LONG,fname VARCHAR(75) null,lname VARCHAR(75) null,email VARCHAR(75) null,empAddress VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table EMP_Employee";
 	public static final String ORDER_BY_JPQL = " ORDER BY employee.empId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY EMP_Employee.empId ASC";
@@ -148,6 +150,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		model.setPsno(soapModel.getPsno());
 		model.setFname(soapModel.getFname());
 		model.setLname(soapModel.getLname());
+		model.setEmail(soapModel.getEmail());
 		model.setEmpAddress(soapModel.getEmpAddress());
 
 		return model;
@@ -224,6 +227,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		attributes.put("psno", getPsno());
 		attributes.put("fname", getFname());
 		attributes.put("lname", getLname());
+		attributes.put("email", getEmail());
 		attributes.put("empAddress", getEmpAddress());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -298,6 +302,12 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 
 		if (lname != null) {
 			setLname(lname);
+		}
+
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
 		}
 
 		String empAddress = (String)attributes.get("empAddress");
@@ -504,6 +514,22 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 
 	@JSON
 	@Override
+	public String getEmail() {
+		if (_email == null) {
+			return "";
+		}
+		else {
+			return _email;
+		}
+	}
+
+	@Override
+	public void setEmail(String email) {
+		_email = email;
+	}
+
+	@JSON
+	@Override
 	public String getEmpAddress() {
 		if (_empAddress == null) {
 			return "";
@@ -566,6 +592,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		employeeImpl.setPsno(getPsno());
 		employeeImpl.setFname(getFname());
 		employeeImpl.setLname(getLname());
+		employeeImpl.setEmail(getEmail());
 		employeeImpl.setEmpAddress(getEmpAddress());
 
 		employeeImpl.resetOriginalValues();
@@ -708,6 +735,14 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 			employeeCacheModel.lname = null;
 		}
 
+		employeeCacheModel.email = getEmail();
+
+		String email = employeeCacheModel.email;
+
+		if ((email != null) && (email.length() == 0)) {
+			employeeCacheModel.email = null;
+		}
+
 		employeeCacheModel.empAddress = getEmpAddress();
 
 		String empAddress = employeeCacheModel.empAddress;
@@ -721,7 +756,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -745,6 +780,8 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		sb.append(getFname());
 		sb.append(", lname=");
 		sb.append(getLname());
+		sb.append(", email=");
+		sb.append(getEmail());
 		sb.append(", empAddress=");
 		sb.append(getEmpAddress());
 		sb.append("}");
@@ -754,7 +791,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.docs.employee.model.Employee");
@@ -805,6 +842,10 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		sb.append(getLname());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>email</column-name><column-value><![CDATA[");
+		sb.append(getEmail());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>empAddress</column-name><column-value><![CDATA[");
 		sb.append(getEmpAddress());
 		sb.append("]]></column-value></column>");
@@ -835,6 +876,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 	private long _psno;
 	private String _fname;
 	private String _lname;
+	private String _email;
 	private String _empAddress;
 	private long _columnBitmask;
 	private Employee _escapedModel;

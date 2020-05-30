@@ -70,6 +70,7 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 		attributes.put("psno", getPsno());
 		attributes.put("fname", getFname());
 		attributes.put("lname", getLname());
+		attributes.put("email", getEmail());
 		attributes.put("empAddress", getEmpAddress());
 
 		return attributes;
@@ -143,6 +144,12 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 			setLname(lname);
 		}
 
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
+		}
+
 		String empAddress = (String)attributes.get("empAddress");
 
 		if (empAddress != null) {
@@ -178,6 +185,16 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 	@Override
 	public Date getCreateDate() {
 		return _employee.getCreateDate();
+	}
+
+	/**
+	* Returns the email of this employee.
+	*
+	* @return the email of this employee
+	*/
+	@Override
+	public String getEmail() {
+		return _employee.getEmail();
 	}
 
 	/**
@@ -358,6 +375,16 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 	@Override
 	public void setCreateDate(Date createDate) {
 		_employee.setCreateDate(createDate);
+	}
+
+	/**
+	* Sets the email of this employee.
+	*
+	* @param email the email of this employee
+	*/
+	@Override
+	public void setEmail(String email) {
+		_employee.setEmail(email);
 	}
 
 	/**

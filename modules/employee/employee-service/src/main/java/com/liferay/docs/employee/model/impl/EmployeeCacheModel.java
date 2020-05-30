@@ -64,7 +64,7 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -88,6 +88,8 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 		sb.append(fname);
 		sb.append(", lname=");
 		sb.append(lname);
+		sb.append(", email=");
+		sb.append(email);
 		sb.append(", empAddress=");
 		sb.append(empAddress);
 		sb.append("}");
@@ -148,6 +150,13 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 			employeeImpl.setLname(lname);
 		}
 
+		if (email == null) {
+			employeeImpl.setEmail("");
+		}
+		else {
+			employeeImpl.setEmail(email);
+		}
+
 		if (empAddress == null) {
 			employeeImpl.setEmpAddress("");
 		}
@@ -178,6 +187,7 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 		psno = objectInput.readLong();
 		fname = objectInput.readUTF();
 		lname = objectInput.readUTF();
+		email = objectInput.readUTF();
 		empAddress = objectInput.readUTF();
 	}
 
@@ -225,6 +235,13 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 			objectOutput.writeUTF(lname);
 		}
 
+		if (email == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(email);
+		}
+
 		if (empAddress == null) {
 			objectOutput.writeUTF("");
 		}
@@ -244,5 +261,6 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 	public long psno;
 	public String fname;
 	public String lname;
+	public String email;
 	public String empAddress;
 }

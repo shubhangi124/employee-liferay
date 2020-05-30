@@ -13,6 +13,7 @@
 		<field name="psno" type="long" />
 		<field name="fname" type="String" />
 		<field name="lname" type="String" />
+		<field name="email" type="String" />
 		<field name="empAddress" type="String" />
 	</model>
 </model-hints>

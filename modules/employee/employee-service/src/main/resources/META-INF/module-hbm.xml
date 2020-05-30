@@ -17,6 +17,7 @@
 		<property name="psno" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="fname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="empAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

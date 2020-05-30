@@ -32,6 +32,8 @@ Employee selectedEmployeeObj = (Employee)renderRequest.getAttribute("employeeObj
 	<br><br>
 	Employee Name: <%= selectedEmployeeObj.getFname()+"&nbsp;"+selectedEmployeeObj.getLname() %>
 	<br><br>
+	Email:  <%= selectedEmployeeObj.getEmail() %>
+	<br><br>
 	Address: <%= selectedEmployeeObj.getEmpAddress() %>
 	<br><br>
 	<input type="button" name="deleteEmployee"  id="deleteEmployee" value="Delete Employee" onclick="deleteEmployeeRecord()" >

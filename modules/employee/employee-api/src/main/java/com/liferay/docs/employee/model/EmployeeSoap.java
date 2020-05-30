@@ -45,6 +45,7 @@ public class EmployeeSoap implements Serializable {
 		soapModel.setPsno(model.getPsno());
 		soapModel.setFname(model.getFname());
 		soapModel.setLname(model.getLname());
+		soapModel.setEmail(model.getEmail());
 		soapModel.setEmpAddress(model.getEmpAddress());
 
 		return soapModel;
@@ -186,6 +187,14 @@ public class EmployeeSoap implements Serializable {
 		_lname = lname;
 	}
 
+	public String getEmail() {
+		return _email;
+	}
+
+	public void setEmail(String email) {
+		_email = email;
+	}
+
 	public String getEmpAddress() {
 		return _empAddress;
 	}
@@ -205,5 +214,6 @@ public class EmployeeSoap implements Serializable {
 	private long _psno;
 	private String _fname;
 	private String _lname;
+	private String _email;
 	private String _empAddress;
 }

@@ -48,10 +48,11 @@ public class EmployeePortlet extends MVCPortlet {
 		long psno = ParamUtil.getLong(request, "psno");
 		String fname = ParamUtil.getString(request, "fname");
 		String lname = ParamUtil.getString(request, "lname");
+		String email = ParamUtil.getString(request, "email");
 		String empAddress = ParamUtil.getString(request, "empAddress");
 		try
 		{
-			_employeeLocalService.addEmployee(serviceContext.getUserId(), psno, fname, lname, empAddress, serviceContext);
+			_employeeLocalService.addEmployee(serviceContext.getUserId(), psno, fname, lname, email, empAddress, serviceContext);
 		}
 		catch(PortalException pe)
 		{
@@ -67,10 +68,11 @@ public class EmployeePortlet extends MVCPortlet {
 		long psno =ParamUtil.getLong(request, "psno");
 		String fname = ParamUtil.getString(request, "fname");
 		String lname = ParamUtil.getString(request, "lname");
+		String email = ParamUtil.getString(request, "email");
 		String empAddress = ParamUtil.getString(request, "empAddress");
 		try
 		{
-			_employeeLocalService.updateEmployee(serviceContext.getUserId(), psno, empId, fname, lname, empAddress, serviceContext);
+			_employeeLocalService.updateEmployee(serviceContext.getUserId(), psno, empId, fname, lname, email, empAddress, serviceContext);
 		}
 		catch(PortalException pe)
 		{

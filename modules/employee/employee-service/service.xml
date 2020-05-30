@@ -28,6 +28,7 @@
 		<column name="psno" type="long" />
 		<column name="fname" type="String" />
 		<column name="lname" type="String" />
+		<column name="email" type="String" />
 		<column name="empAddress" type="String" />
 
 		<!-- Finder methods -->

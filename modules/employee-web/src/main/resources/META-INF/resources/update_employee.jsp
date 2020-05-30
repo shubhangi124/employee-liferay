@@ -35,6 +35,8 @@ Employee selectedEmployeeObj = (Employee)renderRequest.getAttribute("employeeObj
 	<tr><td colspan="2"><br></td></tr>
 	<tr><td>Last Name </td><td><input type="text" name="<portlet:namespace/>lname" id="<portlet:namespace/>lname" value="<%= selectedEmployeeObj.getLname() %>" ></td></tr>
 	<tr><td colspan="2"><br></td></tr>
+	<tr><td>Email </td><td><input type="text" name="<portlet:namespace/>email" id="<portlet:namespace/>email" value="<%= selectedEmployeeObj.getEmail() %>" ></td></tr>
+	<tr><td colspan="2"><br></td></tr>
 	<tr><td>Address </td><td><input type="text" name="<portlet:namespace/>empAddress" id="<portlet:namespace/>empAddress" value="<%= selectedEmployeeObj.getEmpAddress() %>" ></td></tr>
 	<tr><td colspan="2"><br></td></tr>
 	<tr><td colspan="2"><input type="button" name="updateEmployee"  id="updateEmployee" value="Update Employee" onclick="updateEmployeeRecord()" ></td></tr>

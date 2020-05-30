@@ -10,5 +10,6 @@ create table EMP_Employee (
 	psno LONG,
 	fname VARCHAR(75) null,
 	lname VARCHAR(75) null,
+	email VARCHAR(75) null,
 	empAddress VARCHAR(75) null
 );
