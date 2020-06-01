@@ -260,6 +260,18 @@ public class EmployeeLocalServiceUtil {
 		return getService().getEmployees(groupId);
 	}
 
+	public static java.util.List<com.liferay.docs.employee.model.Employee> getEmployees(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEmployees(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.docs.employee.model.Employee> getEmployees(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.docs.employee.model.Employee> obc) {
+		return getService().getEmployees(groupId, start, end, obc);
+	}
+
 	/**
 	* Returns all the employees matching the UUID and company.
 	*

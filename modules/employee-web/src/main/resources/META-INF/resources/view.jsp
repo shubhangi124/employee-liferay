@@ -1,21 +1,28 @@
 <%@ include file="init.jsp" %>
 
-<h2>CRUD Operations</h2>
+<% 
+	long employeescount = EmployeeLocalServiceUtil.getEmployeesCount(scopeGroupId);
+	System.out.println(employeescount);
+%>
 
-<portlet:renderURL var="addEmployee">
-	<portlet:param name="mvcPath" value="/add_employee.jsp"/>
-</portlet:renderURL>
-<portlet:renderURL var="updateEmployee">
-	<portlet:param name="mvcPath" value="/update_employee.jsp"/>
-</portlet:renderURL>
-<portlet:renderURL var="displayEmployee">
-	<portlet:param name="mvcPath" value="/display_employee.jsp"/>
-</portlet:renderURL>
-<portlet:renderURL var="deleteEmployee">
-	<portlet:param name="mvcPath" value="/delete_employee.jsp"/>
-</portlet:renderURL>
-<br>
-<aui:a href="<%= addEmployee.toString() %>">Add Employee</aui:a><br><br>
-<aui:a href="<%= updateEmployee.toString() %>">Update Employee</aui:a><br><br>
-<aui:a href="<%= displayEmployee.toString() %>">View Employees</aui:a><br><br>
-<aui:a href="<%= deleteEmployee.toString() %>">Delete Employee</aui:a><br><br>
+<aui:button-row cssClass="employee-buttons">
+    <portlet:renderURL var="addEmployeeURL">
+        <portlet:param name="mvcPath" value="/edit_employee.jsp" />
+    </portlet:renderURL>
+
+    <aui:button onClick="<%=addEmployeeURL.toString()%>" value="Add Employee"></aui:button>
+</aui:button-row>
+
+<liferay-ui:search-container total="<%= EmployeeLocalServiceUtil.getEmployeesCount(scopeGroupId) %>" >
+	<liferay-ui:search-container-results results="<%= EmployeeLocalServiceUtil.getEmployees(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>" />
+	<liferay-ui:search-container-row className="com.liferay.docs.employee.model.Employee" modelVar="employee" >
+		<liferay-ui:search-container-column-text property="empId" name="Employee ID" />
+		<liferay-ui:search-container-column-text property="psno" name="PS No." />
+		<liferay-ui:search-container-column-text property="fname" name="First Name" />
+		<liferay-ui:search-container-column-text property="lname" name="Last Name" />
+		<liferay-ui:search-container-column-text property="email" name="Email" />
+		<liferay-ui:search-container-column-text property="empAddress" name="Address"/>
+		<liferay-ui:search-container-column-jsp align="right" path="/employee_actions.jsp" />
+	</liferay-ui:search-container-row>
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>

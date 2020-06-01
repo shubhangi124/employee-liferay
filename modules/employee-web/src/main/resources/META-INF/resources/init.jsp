@@ -10,6 +10,10 @@
 <%@ page import="com.liferay.docs.employee.model.Employee" %> 
 <%@ page import="java.util.List" %>
 
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
+<%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

@@ -230,6 +230,14 @@ public interface EmployeeLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Employee> getEmployees(long groupId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEmployees(long groupId, int start, int end)
+		throws SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEmployees(long groupId, int start, int end,
+		OrderByComparator<Employee> obc);
+
 	/**
 	* Returns all the employees matching the UUID and company.
 	*

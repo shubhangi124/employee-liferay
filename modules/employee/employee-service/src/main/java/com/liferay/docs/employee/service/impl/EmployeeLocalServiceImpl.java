@@ -17,8 +17,10 @@ package com.liferay.docs.employee.service.impl;
 import com.liferay.docs.employee.model.Employee;
 import com.liferay.docs.employee.service.base.EmployeeLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.Date;
 import java.util.List;
@@ -107,6 +109,16 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 	public List<Employee> getEmployees(long groupId)
 	{
 		return employeePersistence.findByGroupId(groupId);
+	}
+	
+	public List<Employee> getEmployees(long groupId,  int start, int end) throws SystemException 
+	{
+	    return employeePersistence.findByGroupId(groupId, start, end);
+	}
+
+	public List<Employee> getEmployees(long groupId, int start, int end, OrderByComparator<Employee> obc) 
+	{
+	    return employeePersistence.findByGroupId(groupId, start, end, obc);
 	}
 	
 	public int getEmployeesCount(long groupId)

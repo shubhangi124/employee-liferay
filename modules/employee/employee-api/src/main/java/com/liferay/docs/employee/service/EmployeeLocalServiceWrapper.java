@@ -265,6 +265,20 @@ public class EmployeeLocalServiceWrapper implements EmployeeLocalService,
 		return _employeeLocalService.getEmployees(groupId);
 	}
 
+	@Override
+	public java.util.List<com.liferay.docs.employee.model.Employee> getEmployees(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _employeeLocalService.getEmployees(groupId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.employee.model.Employee> getEmployees(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.docs.employee.model.Employee> obc) {
+		return _employeeLocalService.getEmployees(groupId, start, end, obc);
+	}
+
 	/**
 	* Returns all the employees matching the UUID and company.
 	*
