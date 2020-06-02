@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.model.StagedAuditedModel;
+import com.liferay.portal.kernel.model.WorkflowedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -45,7 +46,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface EmployeeModel extends BaseModel<Employee>, GroupedModel,
-	ShardedModel, StagedAuditedModel {
+	ShardedModel, StagedAuditedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -211,6 +212,87 @@ public interface EmployeeModel extends BaseModel<Employee>, GroupedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the status of this employee.
+	 *
+	 * @return the status of this employee
+	 */
+	@Override
+	public int getStatus();
+
+	/**
+	 * Sets the status of this employee.
+	 *
+	 * @param status the status of this employee
+	 */
+	@Override
+	public void setStatus(int status);
+
+	/**
+	 * Returns the status by user ID of this employee.
+	 *
+	 * @return the status by user ID of this employee
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this employee.
+	 *
+	 * @param statusByUserId the status by user ID of this employee
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this employee.
+	 *
+	 * @return the status by user uuid of this employee
+	 */
+	@Override
+	public String getStatusByUserUuid();
+
+	/**
+	 * Sets the status by user uuid of this employee.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this employee
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this employee.
+	 *
+	 * @return the status by user name of this employee
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this employee.
+	 *
+	 * @param statusByUserName the status by user name of this employee
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this employee.
+	 *
+	 * @return the status date of this employee
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this employee.
+	 *
+	 * @param statusDate the status date of this employee
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
 	 * Returns the psno of this employee.
 	 *
 	 * @return the psno of this employee
@@ -283,6 +365,70 @@ public interface EmployeeModel extends BaseModel<Employee>, GroupedModel,
 	 * @param empAddress the emp address of this employee
 	 */
 	public void setEmpAddress(String empAddress);
+
+	/**
+	 * Returns <code>true</code> if this employee is approved.
+	 *
+	 * @return <code>true</code> if this employee is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this employee is denied.
+	 *
+	 * @return <code>true</code> if this employee is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this employee is a draft.
+	 *
+	 * @return <code>true</code> if this employee is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this employee is expired.
+	 *
+	 * @return <code>true</code> if this employee is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this employee is inactive.
+	 *
+	 * @return <code>true</code> if this employee is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this employee is incomplete.
+	 *
+	 * @return <code>true</code> if this employee is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this employee is pending.
+	 *
+	 * @return <code>true</code> if this employee is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this employee is scheduled.
+	 *
+	 * @return <code>true</code> if this employee is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();

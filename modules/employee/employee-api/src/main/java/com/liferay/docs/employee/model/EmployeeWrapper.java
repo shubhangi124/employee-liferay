@@ -67,6 +67,10 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 		attributes.put("psno", getPsno());
 		attributes.put("fname", getFname());
 		attributes.put("lname", getLname());
@@ -124,6 +128,30 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 
 		Long psno = (Long)attributes.get("psno");
@@ -288,6 +316,56 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 	}
 
 	/**
+	* Returns the status of this employee.
+	*
+	* @return the status of this employee
+	*/
+	@Override
+	public int getStatus() {
+		return _employee.getStatus();
+	}
+
+	/**
+	* Returns the status by user ID of this employee.
+	*
+	* @return the status by user ID of this employee
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _employee.getStatusByUserId();
+	}
+
+	/**
+	* Returns the status by user name of this employee.
+	*
+	* @return the status by user name of this employee
+	*/
+	@Override
+	public String getStatusByUserName() {
+		return _employee.getStatusByUserName();
+	}
+
+	/**
+	* Returns the status by user uuid of this employee.
+	*
+	* @return the status by user uuid of this employee
+	*/
+	@Override
+	public String getStatusByUserUuid() {
+		return _employee.getStatusByUserUuid();
+	}
+
+	/**
+	* Returns the status date of this employee.
+	*
+	* @return the status date of this employee
+	*/
+	@Override
+	public Date getStatusDate() {
+		return _employee.getStatusDate();
+	}
+
+	/**
 	* Returns the user ID of this employee.
 	*
 	* @return the user ID of this employee
@@ -332,9 +410,39 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 		return _employee.hashCode();
 	}
 
+	/**
+	* Returns <code>true</code> if this employee is approved.
+	*
+	* @return <code>true</code> if this employee is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _employee.isApproved();
+	}
+
 	@Override
 	public boolean isCachedModel() {
 		return _employee.isCachedModel();
+	}
+
+	/**
+	* Returns <code>true</code> if this employee is denied.
+	*
+	* @return <code>true</code> if this employee is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _employee.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this employee is a draft.
+	*
+	* @return <code>true</code> if this employee is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _employee.isDraft();
 	}
 
 	@Override
@@ -342,9 +450,59 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 		return _employee.isEscapedModel();
 	}
 
+	/**
+	* Returns <code>true</code> if this employee is expired.
+	*
+	* @return <code>true</code> if this employee is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _employee.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this employee is inactive.
+	*
+	* @return <code>true</code> if this employee is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _employee.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this employee is incomplete.
+	*
+	* @return <code>true</code> if this employee is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _employee.isIncomplete();
+	}
+
 	@Override
 	public boolean isNew() {
 		return _employee.isNew();
+	}
+
+	/**
+	* Returns <code>true</code> if this employee is pending.
+	*
+	* @return <code>true</code> if this employee is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _employee.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this employee is scheduled.
+	*
+	* @return <code>true</code> if this employee is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _employee.isScheduled();
 	}
 
 	@Override
@@ -491,6 +649,56 @@ public class EmployeeWrapper implements Employee, ModelWrapper<Employee> {
 	@Override
 	public void setPsno(long psno) {
 		_employee.setPsno(psno);
+	}
+
+	/**
+	* Sets the status of this employee.
+	*
+	* @param status the status of this employee
+	*/
+	@Override
+	public void setStatus(int status) {
+		_employee.setStatus(status);
+	}
+
+	/**
+	* Sets the status by user ID of this employee.
+	*
+	* @param statusByUserId the status by user ID of this employee
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_employee.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Sets the status by user name of this employee.
+	*
+	* @param statusByUserName the status by user name of this employee
+	*/
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_employee.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Sets the status by user uuid of this employee.
+	*
+	* @param statusByUserUuid the status by user uuid of this employee
+	*/
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_employee.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Sets the status date of this employee.
+	*
+	* @param statusDate the status date of this employee
+	*/
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_employee.setStatusDate(statusDate);
 	}
 
 	/**

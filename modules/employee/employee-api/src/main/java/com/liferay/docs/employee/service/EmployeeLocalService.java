@@ -74,6 +74,7 @@ public interface EmployeeLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public Employee addEmployee(Employee employee);
 
+	@Indexable(type = IndexableType.REINDEX)
 	public Employee addEmployee(long userId, long psno, String fname,
 		String lname, String email, String empAddress,
 		ServiceContext serviceContext) throws PortalException;
@@ -106,6 +107,7 @@ public interface EmployeeLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.DELETE)
 	public Employee deleteEmployee(long empId) throws PortalException;
 
+	@Indexable(type = IndexableType.DELETE)
 	public Employee deleteEmployee(long empId, ServiceContext serviceContext)
 		throws PortalException;
 
@@ -303,6 +305,7 @@ public interface EmployeeLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public Employee updateEmployee(Employee employee);
 
+	@Indexable(type = IndexableType.REINDEX)
 	public Employee updateEmployee(long userId, long psno, long empId,
 		String fname, String lname, String email, String empAddress,
 		ServiceContext serviceContext) throws PortalException;

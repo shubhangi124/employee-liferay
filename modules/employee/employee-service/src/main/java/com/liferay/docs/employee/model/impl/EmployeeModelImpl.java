@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
 
@@ -81,6 +82,10 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "status", Types.INTEGER },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP },
 			{ "psno", Types.BIGINT },
 			{ "fname", Types.VARCHAR },
 			{ "lname", Types.VARCHAR },
@@ -98,6 +103,10 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("statusByUserName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("psno", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("fname", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("lname", Types.VARCHAR);
@@ -105,7 +114,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		TABLE_COLUMNS_MAP.put("empAddress", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table EMP_Employee (uuid_ VARCHAR(75) null,empId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,psno LONG,fname VARCHAR(75) null,lname VARCHAR(75) null,email VARCHAR(75) null,empAddress VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table EMP_Employee (uuid_ VARCHAR(75) null,empId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,psno LONG,fname VARCHAR(75) null,lname VARCHAR(75) null,email VARCHAR(75) null,empAddress VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table EMP_Employee";
 	public static final String ORDER_BY_JPQL = " ORDER BY employee.empId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY EMP_Employee.empId ASC";
@@ -147,6 +156,10 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 		model.setPsno(soapModel.getPsno());
 		model.setFname(soapModel.getFname());
 		model.setLname(soapModel.getLname());
@@ -224,6 +237,10 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 		attributes.put("psno", getPsno());
 		attributes.put("fname", getFname());
 		attributes.put("lname", getLname());
@@ -284,6 +301,30 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 
 		Long psno = (Long)attributes.get("psno");
@@ -471,6 +512,71 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 
 	@JSON
 	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	@JSON
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	@Override
+	public String getStatusByUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getStatusByUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return "";
+		}
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+	}
+
+	@JSON
+	@Override
+	public String getStatusByUserName() {
+		if (_statusByUserName == null) {
+			return "";
+		}
+		else {
+			return _statusByUserName;
+		}
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	@JSON
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
+	@JSON
+	@Override
 	public long getPsno() {
 		return _psno;
 	}
@@ -550,6 +656,86 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 				Employee.class.getName()));
 	}
 
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -589,6 +775,10 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		employeeImpl.setUserName(getUserName());
 		employeeImpl.setCreateDate(getCreateDate());
 		employeeImpl.setModifiedDate(getModifiedDate());
+		employeeImpl.setStatus(getStatus());
+		employeeImpl.setStatusByUserId(getStatusByUserId());
+		employeeImpl.setStatusByUserName(getStatusByUserName());
+		employeeImpl.setStatusDate(getStatusDate());
 		employeeImpl.setPsno(getPsno());
 		employeeImpl.setFname(getFname());
 		employeeImpl.setLname(getLname());
@@ -717,6 +907,27 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 			employeeCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
+		employeeCacheModel.status = getStatus();
+
+		employeeCacheModel.statusByUserId = getStatusByUserId();
+
+		employeeCacheModel.statusByUserName = getStatusByUserName();
+
+		String statusByUserName = employeeCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
+			employeeCacheModel.statusByUserName = null;
+		}
+
+		Date statusDate = getStatusDate();
+
+		if (statusDate != null) {
+			employeeCacheModel.statusDate = statusDate.getTime();
+		}
+		else {
+			employeeCacheModel.statusDate = Long.MIN_VALUE;
+		}
+
 		employeeCacheModel.psno = getPsno();
 
 		employeeCacheModel.fname = getFname();
@@ -756,7 +967,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -774,6 +985,14 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append(", psno=");
 		sb.append(getPsno());
 		sb.append(", fname=");
@@ -791,7 +1010,7 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.docs.employee.model.Employee");
@@ -828,6 +1047,22 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>psno</column-name><column-value><![CDATA[");
@@ -873,6 +1108,10 @@ public class EmployeeModelImpl extends BaseModelImpl<Employee>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _psno;
 	private String _fname;
 	private String _lname;

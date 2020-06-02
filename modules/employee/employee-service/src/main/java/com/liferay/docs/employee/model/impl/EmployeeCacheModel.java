@@ -64,7 +64,7 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -82,6 +82,14 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append(", psno=");
 		sb.append(psno);
 		sb.append(", fname=");
@@ -134,6 +142,23 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 			employeeImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		employeeImpl.setStatus(status);
+		employeeImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			employeeImpl.setStatusByUserName("");
+		}
+		else {
+			employeeImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			employeeImpl.setStatusDate(null);
+		}
+		else {
+			employeeImpl.setStatusDate(new Date(statusDate));
+		}
+
 		employeeImpl.setPsno(psno);
 
 		if (fname == null) {
@@ -184,6 +209,12 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
+		status = objectInput.readInt();
+
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
+
 		psno = objectInput.readLong();
 		fname = objectInput.readUTF();
 		lname = objectInput.readUTF();
@@ -218,6 +249,19 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
+
+		objectOutput.writeInt(status);
+
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 
 		objectOutput.writeLong(psno);
 
@@ -258,6 +302,10 @@ public class EmployeeCacheModel implements CacheModel<Employee>, Externalizable 
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 	public long psno;
 	public String fname;
 	public String lname;

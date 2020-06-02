@@ -14,6 +14,10 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 		<property name="psno" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="fname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
