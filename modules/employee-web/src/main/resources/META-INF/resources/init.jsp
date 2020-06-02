@@ -38,6 +38,8 @@
 
 <%@ page import="javax.portlet.PortletURL" %>
 
+<%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
+
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

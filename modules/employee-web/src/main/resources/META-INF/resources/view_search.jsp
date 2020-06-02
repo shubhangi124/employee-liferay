@@ -28,16 +28,13 @@
 
 <%
 	SearchContext searchContext = SearchContextFactory.getInstance(request);
-	System.out.println(keywords);
 	searchContext.setKeywords(keywords);
 	searchContext.setAttribute("paginationType", "more");
-	searchContext.setStart(0);
-	searchContext.setEnd(10);
+	//searchContext.setStart(0);
+	//searchContext.setEnd(10);
 	
 	Indexer indexer = IndexerRegistryUtil.getIndexer(Employee.class);
-	System.out.println(indexer);
 	Hits hits = indexer.search(searchContext);
-	System.out.println(hits);
 	List<Employee> employees = new ArrayList<Employee>();
 
 	    for (int i = 0; i < hits.getDocs().length; i++) 
@@ -45,7 +42,6 @@
             Document doc = hits.doc(i);
 
             long empId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
-			System.out.println(empId);
             Employee employee = null;
 
             try 
@@ -59,18 +55,15 @@
 
             employees.add(employee);
 	    }
-	    
-// 	    List<Guestbook> guestbooks = GuestbookLocalServiceUtil.getGuestbooks(scopeGroupId);
 
-//         Map<String, String> guestbookMap = new HashMap<String, String>();
-
-//         for (Guestbook guestbook : guestbooks) {
-//                 guestbookMap.put(Long.toString(guestbook.getGuestbookId()), guestbook.getName());
-//         }
 %>
 
-<liferay-ui:search-container delta="10" emptyResultsMessage="no-entries-were-found" total="<%= employees.size() %>">
-	<liferay-ui:search-container-results results="<%= employees %>" />
+<liferay-portlet:renderURL varImpl="iteratorURL">
+        <portlet:param name="mvcPath" value="/view_search.jsp" />
+</liferay-portlet:renderURL>
+
+<liferay-ui:search-container emptyResultsMessage="no-entries-were-found" total="<%= employees.size() %>" iteratorURL="<%= iteratorURL %>" >
+	<liferay-ui:search-container-results results="<%= ListUtil.subList(employees, searchContainer.getStart(), searchContainer.getEnd()) %>" />
         
 	<liferay-ui:search-container-row className="com.liferay.docs.employee.model.Employee" keyProperty="empId" modelVar="employee" escapedModel="<%=true%>">
         
