@@ -73,7 +73,8 @@
 		<liferay-ui:search-container-column-text property="lname" name="Last Name" />
 		<liferay-ui:search-container-column-text property="email" name="Email" />
 		<liferay-ui:search-container-column-text property="empAddress" name="Address"/>
-		<liferay-ui:search-container-column-jsp align="right" path="/employee_actions.jsp" />
+		<liferay-ui:search-container-column-jsp align="right" path="/employee_action_edit.jsp" />
+		<liferay-ui:search-container-column-jsp align="right" path="/employee_action_delete.jsp" />
 		
 	</liferay-ui:search-container-row>
 	

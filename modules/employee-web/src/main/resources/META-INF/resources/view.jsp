@@ -30,6 +30,7 @@
     <aui:button onClick="<%=addEmployeeURL.toString()%>" value="Add Employee"></aui:button>
 </aui:button-row>
 
+
 <liferay-ui:search-container total="<%= EmployeeLocalServiceUtil.getEmployeesCount(scopeGroupId) %>" >
 	<liferay-ui:search-container-results results="<%= EmployeeLocalServiceUtil.getEmployees(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>" />
 	<liferay-ui:search-container-row className="com.liferay.docs.employee.model.Employee" modelVar="employee" >
@@ -39,7 +40,11 @@
 		<liferay-ui:search-container-column-text property="lname" name="Last Name" />
 		<liferay-ui:search-container-column-text property="email" name="Email" />
 		<liferay-ui:search-container-column-text property="empAddress" name="Address"/>
-		<liferay-ui:search-container-column-jsp align="right" path="/employee_actions.jsp" />
+		<liferay-ui:search-container-column-jsp align="right" path="/employee_action_edit.jsp" />
+		<liferay-ui:search-container-column-jsp align="right" path="/employee_action_delete.jsp" />
+		
 	</liferay-ui:search-container-row>
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+
+
